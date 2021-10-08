@@ -1,0 +1,15 @@
+version: "2"
+services:
+  opc:
+    build: ./opc
+    restart: always
+    ports: 
+      - "26543:26543"
+  greengrass:
+    build: ./greengrass
+    restart: always
+    privileged: true
+    depends_on:
+      - opc
+    ports: 
+      - "8883:8883"
