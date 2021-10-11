@@ -25,21 +25,17 @@ COPY "base.config.json" /
 COPY "root.ca.pem" /greengrass/certs/
 
 # Prepare container for Sitewise etc
-RUN mkdir /var/sitewise && \
-    chown ggc_user /var/sitewise && \
-    chmod 700 /var/sitewise && \
-    chmod +x greengrass-entrypoint.sh
+RUN chmod +x greengrass-entrypoint.sh
 
 # Expose 8883 to pub/sub MQTT messages
 EXPOSE 8883
 
-	###########
+#########
 ENV GG_HOST="greengrass-ats.iot.us-east-1.amazonaws.com" \
  IOT_HOST="****.iot.us-east-1.amazonaws.com" \
  THING_ARN="arn:aws:iot:us-east-1:****" \
  CERT="BASE64 cert goes here" \
  PRIVATE_KEY="BASE64 Private Key goes here" 
-
 #########
 
 

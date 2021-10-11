@@ -1,4 +1,7 @@
 version: "2"
+volumes: 
+  sitewise-data:
+  greengrass-logs:
 services:
   opc:
     build: ./opc
@@ -9,7 +12,15 @@ services:
     build: ./greengrass
     restart: always
     privileged: true
+    volumes:
+      - "sitewise-data:/var/sitewise"
+      - "greengrass-logs:/greengrass/ggc/var/log"
     depends_on:
       - opc
     ports: 
       - "8883:8883"
+  logstash:
+    build: ./logstash
+    restart: always
+    ports:
+      - "5044:5044"

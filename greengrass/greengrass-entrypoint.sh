@@ -9,6 +9,10 @@ if grep -q "GreengrassContainer" /greengrass/ggc/deployment/group/group.json; th
     exit 1;
 fi
 
+# provide access to the sitewise volume
+chown ggc_user /var/sitewise && \
+    chmod 700 /var/sitewise
+
 # Deploy Configuration
 node greengrass-config.js
 #start greengrass
